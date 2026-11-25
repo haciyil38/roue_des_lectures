@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>La Roue des Lectures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="wheel">
+  <header id="site-header"></header>
+  <main>
+    <div class="result-banner card" id="banner">
+      <div class="script" id="bannerTitle">Ton défi du moment</div>
+      <div class="big" id="bannerText"></div>
+      <div id="bannerProgress" style="font-weight:700;margin-top:4px"></div>
+      <div class="banner-draws" id="bannerDraws"></div>
+      <div class="muted" id="bannerHint"></div>
+      <div class="muted" id="bannerBook"></div>
+      <div class="banner-actions">
+        <button class="btn sage small" id="finishBook" hidden>📖 J'ai terminé le livre</button>
+        <button class="btn ghost small" id="abandon" hidden>Abandonner ce défi</button>
+      </div>
+    </div>
+
+    <div class="book-pick" id="bookPick">
+      <label for="bookSelect">📖 Pour quel livre ce défi ? <span class="muted">(facultatif)</span></label>
+      <select id="bookSelect"></select>
+    </div>
+
+    <div class="wheels">
+      <section class="card wheel-card">
+        <h2>La roue des rounds</h2>
+        <div class="sub">1 fois par défi</div>
+        <div class="wheel-wrap"><div class="pointer" id="ptr1"></div><canvas id="wheelRounds"></canvas></div>
+        <div class="wheel-result" id="resRounds">—</div>
+        <button class="btn" id="spinRounds">🌸 Tourner les rounds</button>
+        <div class="hint" id="hintRounds"></div>
+      </section>
+      <section class="card wheel-card">
+        <h2>La roue des chapitres</h2>
+        <div class="sub">1 fois par round</div>
+        <div class="wheel-wrap"><div class="pointer" id="ptr2"></div><canvas id="wheelChapters"></canvas></div>
+        <div class="wheel-result" id="resChapters">—</div>
+        <button class="btn" id="spinChapters">🌷 Tourner les chapitres</button>
+        <div class="hint" id="hintChapters"></div>
+      </section>
+    </div>
+
+    <details class="settings card">
+      <summary>🌿 Personnaliser les valeurs des roues</summary>
+      <p class="muted">Sépare les nombres par des virgules (entre 2 et 16 valeurs). Un nombre répété a plus de chances de sortir !</p>
+      <div class="settings-grid">
+        <div><label for="cfgRounds">Rounds</label><input id="cfgRounds"></div>
+        <div><label for="cfgChapters">Chapitres</label><input id="cfgChapters"></div>
+      </div>
+      <p><button class="btn sage small" id="saveCfg">Enregistrer</button>
+         <button class="btn ghost small" id="resetCfg">Valeurs par défaut</button></p>
+    </details>
+
+    <section class="history">
+      <h2>🌼 Mes derniers défis</h2>
+      <ul class="hist-list" id="history"></ul>
+      <p style="text-align:right"><button class="btn ghost small" id="clearHist">Effacer l'historique</button></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="js/common.js"></script>
+  <script src="js/wheels.js"></script>
+</body>
+</html>

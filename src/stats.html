@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Statistiques – La Roue des Lectures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="stats">
+  <header id="site-header"></header>
+  <main>
+    <div class="kpis" id="kpis"></div>
+    <div class="charts">
+      <section class="card chart"><h2>🎡 Rounds tirés (par défi)</h2><div id="chartRounds"></div></section>
+      <section class="card chart"><h2>📖 Chapitres tirés (à chaque round)</h2><div id="chartChapters"></div></section>
+    </div>
+    <div class="charts">
+      <section class="card chart"><h2>🌷 Défis lancés ces 14 derniers jours</h2><div class="timeline" id="timeline"></div></section>
+      <section class="card chart"><h2>📚 Chapitres par livre</h2><div id="chartBooks"></div></section>
+    </div>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="js/common.js"></script>
+  <script src="js/stats.js"></script>
+</body>
+</html>

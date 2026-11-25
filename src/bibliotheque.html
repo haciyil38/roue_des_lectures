@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bibliothèque – La Roue des Lectures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="library">
+  <header id="site-header"></header>
+  <main>
+    <div class="toolbar">
+      <input class="search" id="search" type="search" placeholder="🔍 Chercher un titre ou un auteur…">
+      <div class="tabs" id="tabs">
+        <button class="tab on" data-f="all">Tous</button>
+        <button class="tab" data-f="lu">Lus</button>
+        <button class="tab" data-f="encours">En cours</button>
+        <button class="tab" data-f="alire">À lire</button>
+      </div>
+      <button class="btn" id="addBtn">＋ Ajouter un livre</button>
+    </div>
+
+    <div id="shelf"></div>
+
+    <section class="backup card">
+      <h2 style="font-size:1.3rem;color:var(--sage-deep)">🌿 Sauvegarde</h2>
+      <p class="muted">Tes données sont gardées dans ce navigateur. Exporte-les de temps en temps pour ne rien perdre ou pour les retrouver sur un autre appareil.</p>
+      <button class="btn sage small" id="exportBtn">Exporter</button>
+      <button class="btn ghost small" id="importBtn">Importer</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </section>
+  </main>
+
+  <dialog id="dlg">
+    <form method="dialog" id="form">
+      <h2 id="dlgTitle">Ajouter un livre</h2>
+      <div><label for="fTitle">Titre *</label><input id="fTitle" required maxlength="140"></div>
+      <div><label for="fAuthor">Auteur·rice</label><input id="fAuthor" maxlength="100"></div>
+      <div class="row2">
+        <div><label for="fStatus">Statut</label>
+          <select id="fStatus"><option value="alire">À lire</option><option value="encours">En cours</option><option value="lu">Lu</option></select></div>
+        <div><label for="fDate">Date de fin de lecture</label><input type="date" id="fDate"></div>
+      </div>
+      <div><label>Ma note</label><div class="star-input" id="stars"></div></div>
+      <div>
+        <label>Couleur de la tranche</label>
+        <div class="swatches" id="swatches"></div>
+        <div class="color-custom">
+          <span class="spine-preview" id="spine" title="Aperçu de la tranche"></span>
+          <input type="color" id="fColor" aria-label="Choisir une couleur libre" title="Choisir une couleur libre">
+          <input id="fHex" maxlength="7" placeholder="#c4577b" aria-label="Code hexadécimal" autocomplete="off" spellcheck="false">
+          <span class="muted small-note">ou tape un code hexa</span>
+        </div>
+      </div>
+      <div><label for="fNotes">Mes impressions</label><textarea id="fNotes" rows="3" maxlength="800" placeholder="Ce que j'ai aimé, une citation…"></textarea></div>
+      <div class="dlg-actions">
+        <button type="button" class="btn danger small" id="delBtn" hidden>Supprimer</button>
+        <button type="button" class="btn ghost" id="cancelBtn">Annuler</button>
+        <button type="submit" class="btn">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer id="site-footer"></footer>
+  <script src="js/common.js"></script>
+  <script src="js/library.js"></script>
+</body>
+</html>
