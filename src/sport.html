@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>La roue du sport – La Roue des Lectures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="{ storeKey: 'sport', empty: 'Aucune sortie pour l’instant… tourne la roue ! 🏃', defaults: ['🚶 Marche 20 min','🏃 Course 1 km','🚶 Marche 30 min','🏃 Course 2 km','🚶 Marche 40 min','🏃 Course 3 km','🚶 Marche 50 min','🏃 Course 4 km','🚶 Marche 1 h','🏃 Course 5 km'] }">
+  <header id="site-header"></header>
+  <main>
+    <div class="result-banner card" id="banner">
+      <div class="script">Ta sortie du jour</div>
+      <div class="big" id="bannerText"></div>
+      <div class="banner-actions">
+        <button class="btn sage small" id="markDone">✅ C'est fait !</button>
+        <button class="btn ghost small" id="skip">🔁 Autre tirage</button>
+      </div>
+    </div>
+
+    <section class="card wheel-card single">
+      <h2>La roue du sport</h2>
+      <div class="wheel-wrap"><div class="pointer" id="ptr"></div><canvas id="wheel"></canvas></div>
+      <div class="wheel-result small" id="res">—</div>
+      <button class="btn" id="spin">🏃 Tourner la roue</button>
+    </section>
+
+    <details class="settings card" open>
+      <summary>🌿 Personnaliser la roue</summary>
+      <form class="add-form" id="addForm">
+        <input id="newItem" maxlength="40" placeholder="Ajouter une idée à la main…" autocomplete="off">
+        <button class="btn sage small" type="submit">➕ Ajouter</button>
+      </form>
+      <p class="muted small-note">Clique sur ✕ pour retirer une idée. Ajoute-la plusieurs fois pour qu'elle ait plus de chances de sortir. Entre 2 et 30 idées.</p>
+      <ul class="item-list" id="items"></ul>
+      <p><button class="btn ghost small" id="resetItems">Valeurs par défaut</button></p>
+    </details>
+
+    <section class="history">
+      <h2>🌼 Mes derniers tirages</h2>
+      <ul class="hist-list" id="history"></ul>
+      <p style="text-align:right"><button class="btn ghost small" id="clearHist">Effacer l'historique</button></p>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="js/common.js"></script>
+  <script src="js/wheel-core.js"></script>
+  <script src="js/custom-wheel.js"></script>
+  <script>initCustomWheel({ storeKey: 'sport', empty: 'Aucune sortie pour l’instant… tourne la roue ! 🏃', defaults: ['🚶 Marche 20 min','🏃 Course 1 km','🚶 Marche 30 min','🏃 Course 2 km','🚶 Marche 40 min','🏃 Course 3 km','🚶 Marche 50 min','🏃 Course 4 km','🚶 Marche 1 h','🏃 Course 5 km'] });</script>
+</body>
+</html>

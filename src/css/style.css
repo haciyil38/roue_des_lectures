@@ -201,3 +201,16 @@ footer.site-footer{position:relative; z-index:1; text-align:center; padding:10px
 footer .row{display:flex; justify-content:center; gap:6px; margin-bottom:6px}
 .toast{position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(120px); background:var(--ink); color:#fff; padding:12px 22px; border-radius:999px; z-index:99; transition:.4s}
 .toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ---------- roues personnalisées (sport / activités) ---------- */
+.wheel-card.single{max-width:520px; margin:0 auto}
+.wheel-result.small{font-size:1.7rem; min-height:76px; text-align:center; line-height:1.2}
+.add-form{display:flex; gap:10px; margin:14px 0 6px}
+.add-form input{flex:1}
+.item-list{list-style:none; padding:0; margin:12px 0; display:flex; flex-wrap:wrap; gap:8px}
+.item-list li{display:inline-flex; align-items:center; gap:6px; background:var(--rose-soft); color:var(--rose-deep); font-weight:700; padding:4px 6px 4px 14px; border-radius:999px}
+.item-list .x{border:0; background:none; cursor:pointer; color:var(--muted); font-size:1rem}
+.item-list .x:hover{color:#b4483f}
+.hist-item.done .lbl{text-decoration:line-through; color:var(--muted)}
+.hist-item .chk{border:2px solid var(--sage); background:#fff; border-radius:999px; cursor:pointer; padding:2px 10px; font:inherit; font-weight:700; color:var(--sage-deep)}
+.hist-item.done .chk{background:var(--sage-deep); color:#fff}

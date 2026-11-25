@@ -127,7 +127,7 @@ function init() {
   });
 
   $('exportBtn').onclick = () => {
-    const data = { version: 1, exported: new Date().toISOString(), spins: Store.spins(), books: Store.books(), config: Store.config() };
+    const data = { version: 1, exported: new Date().toISOString(), spins: Store.spins(), books: Store.books(), config: Store.config(), sport: Store.get(KEYS.sport, null), activites: Store.get(KEYS.activites, null) };
     const a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
     a.download = 'roue-des-lectures-sauvegarde.json'; a.click(); URL.revokeObjectURL(a.href);
@@ -141,6 +141,8 @@ function init() {
       if (!confirm('Remplacer les données actuelles par cette sauvegarde ?')) return;
       Store.set(KEYS.books, d.books); Store.set(KEYS.spins, d.spins);
       if (d.config) Store.set(KEYS.config, d.config);
+      if (d.sport) Store.set(KEYS.sport, d.sport);
+      if (d.activites) Store.set(KEYS.activites, d.activites);
       render(); toast('Sauvegarde importée 🌸');
     } catch (e) { toast("Ce fichier n'est pas une sauvegarde valide"); }
     $('importFile').value = '';

@@ -1,5 +1,5 @@
 /* Utilitaires communs : stockage, fleurs, en-tête, pied de page */
-const KEYS = { spins: 'rdl_spins', books: 'rdl_books', config: 'rdl_config' };
+const KEYS = { spins: 'rdl_spins', books: 'rdl_books', config: 'rdl_config', sport: 'rdl_sport', activites: 'rdl_activites' };
 const DEFAULT_CONFIG = { rounds: [1, 2, 3, 4, 5, 6], chapters: [1, 2, 3, 4, 5, 6, 7, 8] };
 
 const Store = {
@@ -83,6 +83,8 @@ function buildChrome() {
   const page = document.body.dataset.page;
   const nav = [
     ['wheel', 'index.html', '🎡', 'La roue'],
+    ['sport', 'sport.html', '🏃', 'Sport'],
+    ['activites', 'activites.html', '🗺️', 'Activités'],
     ['stats', 'stats.html', '🌷', 'Statistiques'],
     ['library', 'bibliotheque.html', '📚', 'Bibliothèque'],
   ];
