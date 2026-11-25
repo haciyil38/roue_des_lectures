@@ -62,10 +62,33 @@ function bookIconSVG(size = 44) {
     <path d="M12 22 C18 20 23 21 27 24 M12 30 C18 28 23 29 27 32 M37 24 C41 21 46 20 52 22 M37 32 C41 29 46 28 52 30" stroke="#f2b5c6" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`;
 }
 function pointerSVG() {
-  return `<svg viewBox="0 0 38 46"><path d="M19 44 C5 28 3 20 3 14 A16 14 0 0 1 35 14 C35 20 33 28 19 44Z" fill="#c4577b" stroke="#fff" stroke-width="3"/><circle cx="19" cy="14" r="5" fill="#fff"/></svg>`;
+  return `<svg viewBox="0 0 38 46"><path d="M19 44 C5 28 3 20 3 14 A16 14 0 0 1 35 14 C35 20 33 28 19 44Z" style="fill:var(--rose-deep)" stroke="#fff" stroke-width="3"/><circle cx="19" cy="14" r="5" fill="#fff"/></svg>`;
 }
 
+/* Thèmes par page : titre, slogan, emoji pour l'en-tête, les décors et les confettis */
+const THEMES = {
+  sport: { title: 'La Roue du Sport', tagline: 'un pas après l’autre…', brand: ['🏃', '👟'],
+    deco: ['👟', '🏅', '⏱️', '🏃'], rain: ['👟', '🏅', '⭐', '💪', '🔥'], div: ['⏱️', '🏃', '⏱️'], foot: 'Allez, on bouge ! 💪' },
+  activites: { title: 'La Roue des Activités', tagline: 'l’aventure du jour…', brand: ['🧭', '🗺️'],
+    deco: ['🎨', '⛰️', '🧭', '📸'], rain: ['🎨', '⛰️', '📸', '🌟', '🎈'], div: ['🌟', '🧭', '🌟'], foot: 'Quelle belle journée en perspective ! ✨' },
+};
+const THEME = THEMES[document.body && document.body.dataset.page] || null;
+
 function petalRain(n = 26) {
+  if (THEME) {
+    for (let i = 0; i < n; i++) {
+      const el = document.createElement('div');
+      el.className = 'petal emoji';
+      el.textContent = THEME.rain[Math.floor(Math.random() * THEME.rain.length)];
+      el.style.setProperty('--s', (18 + Math.random() * 22) + 'px');
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = 3 + Math.random() * 3 + 's';
+      el.style.animationDelay = Math.random() * 1.2 + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+    }
+    return;
+  }
   for (let i = 0; i < n; i++) {
     const el = document.createElement('div');
     el.className = 'petal';
@@ -93,24 +116,30 @@ function buildChrome() {
     header.className = 'site-header';
     header.innerHTML = `
       <a class="brand" href="index.html">
-        ${flowerSVG(6, '#f4a7bd', '#f7dc92', 54)}
-        <span><h1>La Roue des Lectures</h1><small>un chapitre à la fois…</small></span>
-        ${bookIconSVG(54)}
+        ${THEME ? `<span style="font-size:48px;line-height:1">${THEME.brand[0]}</span>` : flowerSVG(6, '#f4a7bd', '#f7dc92', 54)}
+        <span><h1>${THEME ? THEME.title : 'La Roue des Lectures'}</h1><small>${THEME ? THEME.tagline : 'un chapitre à la fois…'}</small></span>
+        ${THEME ? `<span style="font-size:48px;line-height:1">${THEME.brand[1]}</span>` : bookIconSVG(54)}
       </a>
       <nav class="nav">${nav.map(([k, href, ic, label]) =>
         `<a href="${href}" class="${k === page ? 'active' : ''}"><span>${ic}</span>${label}</a>`).join('')}</nav>
-      <div class="divider">${flowerSVG(5, '#f2b5c6', '#f7dc92', 22)}${leafSVG(22)}${flowerSVG(5, '#d9ccee', '#f7dc92', 22)}</div>`;
+      <div class="divider">${THEME ? THEME.div.map(e => `<span style="font-size:22px">${e}</span>`).join('') : flowerSVG(5, '#f2b5c6', '#f7dc92', 22) + leafSVG(22) + flowerSVG(5, '#d9ccee', '#f7dc92', 22)}</div>`;
   }
   const footer = document.getElementById('site-footer');
   if (footer) {
     footer.className = 'site-footer';
-    footer.innerHTML = `<div class="row">${[0, 1, 2, 3, 4].map(() => randomFlower(26)).join('')}</div>
-      <div class="script" style="font-size:1.3rem">Fait avec amour 💛</div>`;
+    footer.innerHTML = `<div class="row">${[0, 1, 2, 3, 4].map(() => THEME
+        ? `<span style="font-size:26px">${THEME.rain[Math.floor(Math.random() * THEME.rain.length)]}</span>` : randomFlower(26)).join('')}</div>
+      <div class="script" style="font-size:1.3rem">${THEME ? THEME.foot : 'Fait avec amour 💛'}</div>`;
   }
   const decos = [['tl', 230], ['tr', 160], ['bl', 190], ['br', 260]];
   decos.forEach(([pos, size], i) => {
     const d = document.createElement('div');
     d.className = 'deco ' + pos;
+    if (THEME) {
+      d.classList.add('emoji'); d.style.setProperty('--s', Math.round(size * 0.7) + 'px');
+      d.innerHTML = `<span style="animation-delay:${-i * 2}s">${THEME.deco[i % THEME.deco.length]}</span>`;
+      document.body.prepend(d); return;
+    }
     const [c, m] = FLOWER_COLORS[i % FLOWER_COLORS.length];
     d.innerHTML = flowerSVG(7, c, m, size);
     document.body.prepend(d);

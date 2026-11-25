@@ -1,5 +1,9 @@
 /* Roue partagée par toutes les pages */
-const PALETTE = ['#f9c5d1', '#fde2b8', '#cfe3c3', '#d9ccee', '#bfe0e6', '#f7d6e0'];
+const THEME_DEFAULT = ['#f9c5d1', '#fde2b8', '#cfe3c3', '#d9ccee', '#bfe0e6', '#f7d6e0'];
+function themeVar(name, fallback) {
+  const v = getComputedStyle(document.body).getPropertyValue(name).trim();
+  return v || fallback;
+}
 const TAU = Math.PI * 2;
 
 class Wheel {
@@ -17,6 +21,11 @@ class Wheel {
     const dpr = window.devicePixelRatio || 1;
     this.canvas.width = size * dpr; this.canvas.height = size * dpr;
     const ctx = this.ctx;
+    const PALETTE = themeVar('--wheel-palette', '').split(',').map(s => s.trim()).filter(Boolean);
+    if (!PALETTE.length) PALETTE.push(...THEME_DEFAULT);
+    const HUB = themeVar('--rose', '#f4a7bd');
+    const BORDER = themeVar('--wheel-border', '#c4577b');
+    const FONT = themeVar('--font-head', '"Playfair Display", serif');
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, size, size);
     const c = size / 2, r = c - 10, n = this.values.length, seg = TAU / n;
@@ -24,12 +33,12 @@ class Wheel {
     // bord doré
     ctx.beginPath(); ctx.arc(c, c, r + 6, 0, TAU);
     ctx.fillStyle = '#fff'; ctx.fill();
-    ctx.lineWidth = 6; ctx.strokeStyle = '#c4577b'; ctx.stroke();
+    ctx.lineWidth = 6; ctx.strokeStyle = BORDER; ctx.stroke();
 
     // une seule taille de police pour toute la roue, réduite si un libellé est trop long
     const maxW = r - size * 0.19;
     let fs = Math.min(size * 0.085, seg * r * 0.5);
-    ctx.font = `700 ${fs}px "Playfair Display", serif`;
+    ctx.font = `700 ${fs}px ${FONT}`;
     for (const v of this.values) {
       const w = ctx.measureText(String(v)).width;
       if (w > maxW) fs = Math.max(10, fs * Math.min(1, maxW / w));
@@ -49,7 +58,7 @@ class Wheel {
       ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
       ctx.fillStyle = '#4a3a3f';
       const label = String(this.values[i]);
-      ctx.font = `700 ${fs}px "Playfair Display", serif`;
+      ctx.font = `700 ${fs}px ${FONT}`;
       ctx.fillText(label, r - size * 0.05, 0);
       ctx.restore();
     }
@@ -64,7 +73,7 @@ class Wheel {
     for (let k = 0; k < 6; k++) {
       const a = (k * TAU) / 6;
       ctx.beginPath(); ctx.arc(c + Math.cos(a) * pr * 1.3, c + Math.sin(a) * pr * 1.3, pr, 0, TAU);
-      ctx.fillStyle = '#f4a7bd'; ctx.fill();
+      ctx.fillStyle = HUB; ctx.fill();
     }
     ctx.beginPath(); ctx.arc(c, c, pr * 1.1, 0, TAU);
     ctx.fillStyle = '#f7dc92'; ctx.fill();
